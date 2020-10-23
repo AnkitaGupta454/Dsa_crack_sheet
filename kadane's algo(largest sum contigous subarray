@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n;
+    cout<<"Enter length of array:";
+    cin>>n;
+    int arr[n];
+    cout<<"\n Enter array elements:\n";
+    for(int i=0;i<n;i++)
+    cin>>arr[i];
+    int meh=0,msf=0;
+    for(int i=0;i<n;i++)
+    {
+        meh=meh+arr[i];
+        if(meh<arr[i])
+        meh=arr[i];
+        if(msf<meh)
+        msf=meh;
+    }
+    cout<<"\n largest sum is:"<<msf;
+    return 0;
+}
