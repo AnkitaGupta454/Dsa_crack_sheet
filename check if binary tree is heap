@@ -1,0 +1,77 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node{
+    public:
+    int data;
+    node *left,*right;
+};
+
+node* newNode(int data)
+{
+    node* Node=new node();
+    Node->data=data;
+    Node->left=Node->right=NULL;
+    return Node;
+}
+
+bool isHeapUtil(node* root)
+{
+    if(root->right==NULL&&root->left==NULL)
+    return true;
+    if(root->right==NULL)
+    {
+        if(root->data>=root->left->data)
+        return true;
+    }
+    
+    if((root->data>=root->left->data)&&(root->data>=root->right->data))
+    return((isHeapUtil(root->right))&&(isHeapUtil(root->left)));
+}
+
+unsigned int countNodes(node* root)
+{
+    if(root==NULL)
+    return 1;
+    return(1+countNodes(root->left)+countNodes(root->right));
+}
+
+bool isComplete(node* root,int index,int count_Nodes)
+{
+    if(root==NULL)
+    return true;
+    if(index>=count_Nodes)
+    return false;
+    return((isComplete(root->left,2*index+1,count_Nodes))&&(isComplete(root->right,2*index+2,count_Nodes)));
+}
+
+bool isHeap(node *root)
+{
+    unsigned int count=countNodes(root);
+    int index=0;
+    if(isComplete(root,index,count)&&isHeapUtil(root))
+    return true;
+    return false;
+}
+int main()
+{
+   node* root=newNode(10);
+   root->left=newNode(9);
+   root->right=newNode(8);
+   root->left->left=newNode(7);
+   root->left->right=newNode(6);
+   root->right->left=newNode(5);
+   root->right->right=newNode(4);
+   root->left->left->left=newNode(3);
+    root->left->left->right=newNode(2);
+    root->right->left->left=newNode(1);
+    if(isHeap(root))
+    cout<<"Given tree is  heap";
+    else
+    cout<<"Given tree is not  heap";
+    return 0;
+}
+
+
+OUTPUT:-
+Given tree is heap
