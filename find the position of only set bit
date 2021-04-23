@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool powerof2(int n)
+{
+    return (n&&!(n&(n-1)));
+}
+
+int findPos(int n)
+{
+    if(!powerof2(n))
+    return -1;
+    unsigned int i=1,pos=1;
+    while(!(i&n))
+    {
+        i=i<<1;
+        pos++;
+    }
+    return pos;
+}
+int main()
+{
+   int n = 16; 
+    int pos = findPos(n); 
+    (pos == -1) ? cout << "n = " << n << ", Invalid number" << endl : cout << "n = " << n << ", Position " << pos << endl; 
+  
+    n = 12; 
+    pos = findPos(n); 
+    (pos == -1) ? cout << "n = " << n << ", Invalid number" << endl : cout << "n = " << n << ", Position " << pos << endl; 
+  
+    n = 128; 
+    pos = findPos(n); 
+    (pos == -1) ? cout << "n = " << n << ", Invalid number" << endl : cout << "n = " << n << ", Position " << pos << endl; 
+  
+    return 0;
+}
+
+
+Output:-
+n = 16, Position 5                                                                                             
+n = 12, Invalid number                                                                                         
+n = 128, Position 8  

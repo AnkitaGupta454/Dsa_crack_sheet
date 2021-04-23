@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool PowerOf2(int n)
+{
+  return(n&&!(n&(n-1)));
+}
+int main()
+{
+   int n;
+   cin>>n;
+   if(PowerOf2(n))
+   cout<<"It is power of 2";
+   else
+      cout<<"It is not power of 2";
+    return 0;
+}

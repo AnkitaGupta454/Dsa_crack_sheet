@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+struct node{
+    int data;
+    struct node *left,*right;
+};
+struct node* newNode(int data)
+{
+    node* temp=new node();
+    temp->data=data;
+    temp->left=temp->right=NULL;
+    return temp;
+}
+void inoreder(node* root,vector<int>&a)
+{
+    if(root==NULL)
+    return;
+    inoreder(root->left,a);
+    a.push_back(root->data);
+    inoreder(root->right,a);
+}
+void Preorder(node *root)
+{
+    if(root==NULL)
+    return;
+    cout<<root->data<<" ";
+    Preorder(root->left);
+    Preorder(root->right);
+}
+void convertBSTutil(node* root,vector<int>&a,int *i){
+    if(root==NULL)
+    return;
+    root->data=a[++(*i)];
+    convertBSTutil(root->left,a,i);
+    convertBSTutil(root->right,a,i);
+}
+void convertBST(node* root)
+{
+    if(root==NULL)
+    return;
+    vector<int>a;
+    int i=-1;
+    inoreder(root,a);
+    convertBSTutil(root,a,&i);
+}
+int main()
+{
+    node* root=newNode(4);
+    root->left=newNode(2);
+    root->right=newNode(6);
+    root->left->left=newNode(1);
+    root->left->right=newNode(3);
+    root->right->left=newNode(5);
+    root->right->right=newNode(7);
+    convertBST(root);
+    cout<<"Preorder traversal of heap is:\n";
+    Preorder(root);
+    return 0;
+}
+
+
+output:-
+Preorder traversal of heap is:
+1 2 3 4 5 6 7

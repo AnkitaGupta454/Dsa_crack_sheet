@@ -1,0 +1,49 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int merge(int a[],int temp[],int left,int mid,int right){
+    int i=left,j=mid,k=left,inv_count=0;
+    while(i<=mid-1&&j<=right){
+        if(a[i]<=a[j])
+        temp[k++]=a[i++];
+        else{
+            temp[k++]=a[j++];
+            inv_count=inv_count+(mid-i);
+        }
+    }
+        while(i<=mid-1)
+        temp[k++]=a[i++];
+        while(j<=right)
+        temp[k++]=a[j++];
+        for(int i=left;i<=right;i++)
+        a[i]=temp[i];
+     return inv_count;
+}
+    
+int _mergeSort(int a[],int temp[],int left,int right){
+   int mid,inv_count=0;
+   if(right>left)
+   {
+       mid=(right+left)/2;
+       inv_count+=_mergeSort(a,temp,left,mid);
+       inv_count+=_mergeSort(a,temp,mid+1,right);
+       inv_count+=merge(a,temp,left,mid+1,right);
+   }
+    return inv_count;
+}
+
+int mergeSort(int a[],int n){
+    int temp[n];
+    return(_mergeSort(a,temp,0,n-1));
+}
+int main()
+{
+    int a[]={1,20,6,4,5};
+    int inv_count=mergeSort(a,5);
+    cout<<"Inversion count is: "<<inv_count;
+    return 0;
+}
+
+
+OUTPUT:-
+Inversion count is : 5

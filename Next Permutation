@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void NextPermutation(vector<int>&nums)
+{
+    int n=nums.size(),k,l;
+    for(k=n-2;k>=0;k--)
+    {
+        if(nums[k]<nums[k+1])
+        break;
+    }
+    if(k<0)
+    reverse(nums.begin(),nums.end());
+    else{
+    for(l=n-1;l>=0;l--)
+    {
+        if(nums[l]>nums[k])
+        break;
+    }
+    swap(nums[k],nums[l]);
+    reverse(nums.begin()+k+1,nums.end());
+    }
+    for(auto i:nums)
+    cout<<(i)<<" ";
+}
+int main()
+{
+    vector<int>nums;
+    nums.push_back(1);
+    nums.push_back(3);
+    nums.push_back(5);
+    nums.push_back(4);
+    nums.push_back(2);
+    cout<<"Next Permutation is :\n";
+    NextPermutation(nums);
+    return 0;
+}
+
+
+OUTPUT:-
+Next Permutation is :                                                                                           
+1 4 2 3 5 
