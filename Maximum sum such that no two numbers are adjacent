@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+int sum(int a[],int n)
+{
+    int incl=a[0],excl=0,excl_new,i;
+    for(i=1;i<n;i++)
+    {
+        excl_new=(incl>excl)?incl:excl;
+        incl=excl+a[i];
+        excl=excl_new;
+    }
+    return (incl>excl)?incl:excl;
+}
+
+int main()
+{
+   int a[]={5,5,10,100,10,5};
+   int n=sizeof(a)/sizeof(a[0]);
+   cout<<"Sum is "<<sum(a,n);
+    return 0;
+}

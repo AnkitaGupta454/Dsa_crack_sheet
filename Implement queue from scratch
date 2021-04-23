@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+# define N 6
+int queue[N];
+int front=-1;
+int rear=-1;
+void enqueue()
+{
+    int x;
+    cout<<"\nEnter value";
+    cin>>x;
+    if(rear==N-1)
+    cout<<"queue overflow";
+    else if(front==-1&&rear==-1)
+    {
+        front=rear=0;
+        queue[rear]=x;
+    }
+    else
+    {
+        rear++;
+        queue[rear]=x;
+    }
+}
+
+void dequeue()
+{
+ if(front==-1&&rear==-1)
+ cout<<"\n queue underflow";
+ else if(front==rear)
+ {
+     cout<<"\n dequeued element is"<<queue[front];
+     front=rear=-1;
+ }
+ else
+ {
+      cout<<"\n dequeued element is"<<queue[front];
+      front++;
+ }
+}
+
+void Display()
+{
+  if(front==-1&&rear==-1)
+  cout<<"queue is empty";
+  else
+  {
+      for(int i=front;i<rear+1;i++)
+      cout<<queue[i]<<" ";
+  }
+}
+void peek()
+{
+    if(front==-1&&rear==-1)
+  cout<<"queue is empty";
+  else
+  cout<<"\n"<<queue[front];
+}
+
+void isFull()
+{
+    if(rear==N-1)
+    cout<<"\n queue is full";
+    else
+    cout<<"\n queue is not full";
+}
+
+void isEmpty()
+{
+    if(front==rear)
+    cout<<"\nqueue is empty";
+    else
+    cout<<"\n queue is not empty";
+}
+int main()
+{
+    
+    enqueue();
+    enqueue();
+    enqueue();
+    enqueue();
+    enqueue();
+    dequeue();
+    dequeue();
+    cout<<"\n queue is \n";
+    Display();
+    isFull();
+    peek();
+    isEmpty();
+    return 0;
+}

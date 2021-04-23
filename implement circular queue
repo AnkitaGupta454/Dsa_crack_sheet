@@ -1,0 +1,72 @@
+#include<iostream>
+using namespace std;
+struct node{
+    int data;
+    struct node* next;
+};
+struct node* front=0;
+ struct node* rear=0;
+
+void enqueu(int data)
+{
+    struct node *newnode=new node;
+    newnode->data=data;
+    if(rear==0)
+    {
+        rear=front=newnode;
+        rear->next=front;
+    }
+    else
+    {
+        rear->next=newnode;
+        rear=newnode;
+        rear->next=front;
+    }
+}
+
+void dequeue()
+{
+    struct node *temp=front;
+    if(front==rear)
+    {
+        cout<<"\n dequeued element is"<<front->data;
+        front=rear=0;
+        free(temp);
+    }
+    else
+    {
+        cout<<"\n dequeued element is"<<front->data;
+        front=front->next;
+        rear->next=front;
+        free(temp);
+    }
+}
+
+void Display()
+{
+     struct node *temp=front;
+    if(front==0&&rear==0)
+    {
+        cout<<"\n List is empty";
+    }
+    else
+    {
+        while(temp->next!=front)
+        {
+            cout<<temp->data<<" ";
+            temp=temp->next;
+        }
+        cout<<temp->data;
+    }
+}
+
+int main()
+{
+    enqueu(4);
+    enqueu(3);
+    enqueu(2);
+    enqueu(1);
+    dequeue();
+    cout<<"\n queue is \n";
+    Display();
+}

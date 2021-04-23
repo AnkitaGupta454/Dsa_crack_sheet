@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+//structure of node in a linked list
+struct Node
+{
+	int data;
+	struct  Node* next;	
+	Node(int data)
+	{
+		this->data=data;
+		next=NULL;
+	}
+};
+struct Node* head=NULL;
+
+void push(int data)
+{
+	Node* temp=new Node(data);
+	temp->next=head;
+	head=temp;
+}
+void print(Node* head)
+{
+	struct Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+
+void movefront(Node** head)
+{
+    Node* p=*head,*prev=NULL;
+    while(p->next!=NULL)
+    {
+        prev=p;
+        p=p->next;
+    }
+    
+    
+    p->next=*head;
+    prev->next=NULL;
+    *head=p;
+}
+
+int main(){
+	push(5);
+	push(9);
+	push(5);
+	push(1);
+	push(2);
+	push(9);
+	print(head);
+	cout<<"\n list after moving last element to front\n";
+	movefront(&head);
+	print(head);
+
+}

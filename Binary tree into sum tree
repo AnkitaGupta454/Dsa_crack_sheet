@@ -1,0 +1,52 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+class node  
+{  
+    public: 
+    int data;  
+    node* left;  
+    node* right;  
+};  
+  
+int tosumtree(node* root)
+{
+    if(root==NULL)
+    return 0;
+    int old_val=root->data;
+    root->data=tosumtree(root->left)+tosumtree(root->right);
+    return old_val+root->data;
+}
+node* newNode(int data)  
+{  
+    node* new_node = new node();  
+    new_node->data = data;  
+    new_node->left = new_node->right = NULL;  
+    return (new_node);  
+}  
+  
+  void Inorder(node* root)
+  {
+      if(root==NULL)
+      return;
+      Inorder(root->left);
+      cout<<root->data<<" ";
+      Inorder(root->right);
+  }
+
+/* Driver code*/
+int main()  
+{  
+    node *root = newNode(10);  
+    root->left = newNode(-2);  
+    root->right = newNode(6);  
+    root->left->left = newNode(8);  
+    root->left->right = newNode(-4);  
+    root->right->left = newNode(7);
+    root->right->right=newNode(5);
+    tosumtree(root);
+    cout<<"Inorder traversal of the resultant tree is \n";
+    Inorder(root);  
+  
+    return 0;  
+}  
+  

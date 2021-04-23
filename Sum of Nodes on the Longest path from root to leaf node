@@ -1,0 +1,53 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+class node{
+    public:
+    int data;node *left;node *right;
+};
+node* getNode(int data)
+{
+    node *Node=new node();
+    Node->data=data;
+    Node->left=Node->right=NULL;
+    return Node;
+}
+int findsum(node* root,int sum,int len,int &maxlen,int &maxsum)
+{
+    if(!root)
+    {
+        if(maxlen<len)
+        {
+            maxlen=len;
+            maxsum=sum;
+        }
+        else if(maxlen==len&&maxsum<sum)
+        {
+            maxsum=sum;
+        }
+       return maxsum;
+    }
+    
+    findsum(root->left,sum+root->data,len+1,maxlen,maxsum);
+     findsum(root->right,sum+root->data,len+1,maxlen,maxsum);
+}
+
+int sum(node* root)
+{
+    int maxsum=INT_MIN,maxlen=0;
+    findsum(root,0,0,maxlen,maxsum);
+}
+int main()
+{
+ node* root = getNode(4);         /*        4        */
+    root->left = getNode(2);         /*       / \       */
+    root->right = getNode(5);        /*      2   5      */
+    root->left->left = getNode(7);   /*     / \ / \     */
+    root->left->right = getNode(1);  /*    7  1 2  3    */
+    root->right->left = getNode(2);  /*      /          */
+    root->right->right = getNode(3); /*     6           */
+    root->left->right->left = getNode(6);
+   cout<<"sum is :"<<sum(root);  
+ 
+    return 0;
+}

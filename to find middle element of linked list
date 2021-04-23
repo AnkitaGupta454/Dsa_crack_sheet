@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+//structure of node in a linked list
+struct Node
+{
+	int data;
+	struct  Node* next;	
+	Node(int data)
+	{
+		this->data=data;
+		next=NULL;
+	}
+};
+struct Node* head=NULL;
+
+void push(int data)
+{
+	Node* temp=new Node(data);
+	temp->next=head;
+	head=temp;
+}
+void print()
+{
+	struct Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+
+void midele(Node* head)
+{
+	Node *p=head,*q=head;
+	while(p&&q&&q->next)
+	{
+		p=p->next;
+		q=q->next->next;
+	}
+	cout<<"\n Middle element of linked list is: "<<p->data;
+}
+int main(){
+	push(15);
+	push(20);
+	push(30);
+	push(35);
+	push(40);
+	print();
+	midele(head);
+}

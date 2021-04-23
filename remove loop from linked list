@@ -1,0 +1,77 @@
+#include <iostream>
+using namespace std;
+//structure of node in a linked list
+struct Node
+{
+	int data;
+	struct  Node* next;	
+	Node(int data)
+	{
+		this->data=data;
+		next=NULL;
+	}
+};
+struct Node* head=NULL;
+
+void push(int data)
+{
+	Node* temp=new Node(data);
+	temp->next=head;
+	head=temp;
+}
+void print()
+{
+	struct Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+void removeloop(Node *slow,Node *curr)
+{
+    Node *ptr1=NULL,*ptr2=NULL;
+    ptr1=curr;
+    while(1==1)
+    {
+        ptr2=slow;
+        while(ptr2->next!=curr&&ptr2->next!=ptr1)
+        ptr2=ptr2->next;
+        if(ptr2->next==ptr1)
+        break;
+        ptr1=ptr1->next;
+    }
+        ptr2->next=NULL;
+    
+    
+}
+ bool isLoop(Node* head)
+ {
+ 	Node *p,*q;
+ 	p=q=head;
+    while(p&&q&&q->next)
+    {
+        p=p->next;
+        q=q->next->next;
+        if(p==q)
+        {removeloop(p,head);
+        return true;}
+    }
+    return false;
+ }
+
+
+
+int main(){
+	push(15);
+	push(20);
+	push(30);
+	push(35);
+	push(40);
+	print();
+	head->next->next->next->next->next=head;
+	isLoop(head);
+	cout<<"\n List after removing loop is ";
+	print();
+	
+}

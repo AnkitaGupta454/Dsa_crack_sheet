@@ -1,0 +1,24 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int foundpair(int a[],int n,int x,int k)
+{
+    int i=0;
+    while(i<n)
+    {
+        if(a[i]==x)
+        return i;
+        i=i+abs(a[i]-x/k);
+    }
+    return -1;
+}
+int main()
+{
+    int arr[] = {4, 5, 6, 7, 6};
+          int k = 1;
+          int x = 6;
+          int n=sizeof(arr)/sizeof(arr[0]);
+          cout<<"Element found at "<<foundpair(arr,n,x,k);
+    return 0;
+}

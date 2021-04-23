@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+//structure of node in a linked list
+struct Node
+{
+	int data;
+	struct  Node* next;	
+	Node(int data)
+	{
+		this->data=data;
+		next=NULL;
+	}
+};
+struct Node* head=NULL;
+
+void push(int data)
+{
+	Node* temp=new Node(data);
+	temp->next=head;
+	head=temp;
+}
+void print()
+{
+	struct Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+
+void deleteduplicate(Node* head)
+{
+    Node *p=head,*q,*temp=NULL;
+    while(p!=NULL)
+    {
+    	q=p->next;
+    	while(q!=NULL)
+    	{
+    		if(p->data!=q->data)
+    			q=q->next;
+    		else
+    		{
+    			temp=q;
+    			q->next=q->next->next;
+    			free(temp);
+    		}
+    	}
+    	p=p->next;
+    }
+}
+
+int main(){
+	push(5);
+	push(9);
+	push(5);
+	push(1);
+	push(2);
+	push(9);
+	print();
+	cout<<"\n list after deleting duplicats\n";
+	deleteduplicate(head);
+	print();
+
+}

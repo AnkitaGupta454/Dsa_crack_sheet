@@ -1,0 +1,45 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+class node{
+    public:
+    int data;node *left;node *right;
+};
+node* newNode(int data)
+{
+    node *Node=new node();
+    Node->data=data;
+    Node->left=Node->right=NULL;
+    return Node;
+}
+
+int sum(node* root)
+{
+    if(root==NULL)
+    return 0;
+   return(root->data+sum(root->left)+sum(root->right));
+}
+
+int isSum(node *root){
+    int ls,rs;
+    if(root==NULL||root->left==NULL&&root->right==NULL)
+    return 1;
+    ls=sum(root->left);
+    rs=sum(root->right);
+    return((root->data==ls+rs)&&(isSum(root->left))&&isSum(root->right));
+}
+int main()
+{
+       node* root = newNode(26); 
+    root->left = newNode(10); 
+    root->right = newNode(3); 
+    root->left->left = newNode(4); 
+    root->left->right = newNode(6); 
+     
+    root->right->right = newNode(3);
+    if(isSum(root))
+    std::cout << "Given tree is a sum tree" << std::endl;
+    else
+    cout<<"Given tree is not a sum tree";
+    return 0;
+}

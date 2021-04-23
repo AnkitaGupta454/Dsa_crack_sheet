@@ -1,0 +1,30 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+void negativeelement(int a[],int k,int size)
+{
+    for(int i=0;i<=size-k;i++)
+    {
+        int j=i,count=0;
+        while(j<i+k)
+        {
+            if(a[j]<0)
+            {
+                cout<<a[j]<<" ";
+                count++;
+                break;
+            }
+            else
+            j++;
+        }
+        if(count==0)
+        cout<<"0"<<" ";
+    }
+}
+int main()
+{
+ int a[8]={12, -1, -7, 8, -15, 30, 16, 28} ;
+ negativeelement(a,3,8);
+    return 0;
+}

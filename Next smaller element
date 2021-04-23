@@ -1,0 +1,29 @@
+#include<stdio.h>
+#include<bits/stdc++.h>
+using namespace std;
+stack<int> s;
+int main()
+{
+    int a[5]={4,8,5,2,25};
+    s.push(a[0]);
+    for(int i=1;i<5;i++)
+    {
+        if(s.empty())
+        {
+            s.push(a[i]);
+            continue;
+        }
+        while(s.empty()==false&&s.top()>a[i])
+        {
+            cout<<a[i]<<" ";
+            s.pop();
+        }
+        s.push(a[i]);
+    }
+    while(s.empty()==false)
+    {
+        cout<<"-1"<<" ";
+        s.pop();
+    }
+    return 0;
+}

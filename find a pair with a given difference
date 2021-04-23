@@ -1,0 +1,28 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main()
+{
+     int a[] = {5,20,3,2,50,80};
+          int n=sizeof(a)/sizeof(a[0]);
+          int k=78;
+          int l=0,h=n-1; 
+          int count=0;
+          while(l<=h){
+          if(abs(a[l]-a[h])==k)
+          {
+            cout<<"pair is ["<<a[l]<<","<<a[h]<<"]";
+            count=1;
+            break;
+          }
+          else if(abs(a[l]-a[h])<k)
+          l++;
+          else 
+          h--;
+          }
+          if(count==0)
+          cout<<"No such pair exist";
+    return 0;
+}

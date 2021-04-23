@@ -1,0 +1,52 @@
+#include <iostream>
+#include<string.h>
+#include<bits/stdc++.h>
+using namespace std;
+std::stack<char> st ;
+int paranthesisMatched(string s)
+{
+  char x;
+  for(int i=0;i<s.length();i++)
+  {
+      if(s[i]=='('||s[i]=='{'||s[i]=='[')
+     
+     { st.push(s[i]); continue;}
+        if (st.empty()) 
+            return false; 
+  
+        switch (s[i]) { 
+        case ')': 
+            x = st.top(); 
+            st.pop(); 
+            if (x == '{' || x == '[') 
+                return false; 
+            break; 
+  
+        case '}': 
+            x = st.top(); 
+            st.pop(); 
+            if (x == '(' || x == '[') 
+                return false; 
+            break; 
+  
+        case ']': 
+            x = st.top(); 
+            st.pop(); 
+            if (x == '(' || x == '{') 
+                return false; 
+            break; 
+        } 
+    } 
+    return (st.empty()); 
+
+}
+
+int main()
+{
+    string s="[]()}";
+    if(paranthesisMatched(s))
+    cout<<"The paranthesis are balanced";
+    else
+    cout<<"paranthesis are not balanced";
+ 
+}

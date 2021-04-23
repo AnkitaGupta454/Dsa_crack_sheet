@@ -1,0 +1,68 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+#define N 5
+int deq[N];
+int f=-1,r=-1;
+void enqueuerear(int x)
+{
+    if((f==0&&r==N-1)||(f==r+1))
+    cout<<"\nstack overflow";
+    else if(f==-1&&r==-1)
+    {
+        f=r=0;
+        deq[r]=x;
+    }
+    else if(r==N-1)
+    {
+        r=0;
+        deq[r]=x;
+    }
+    else
+    {
+        r++;
+        deq[r]=x;
+    }
+}
+
+void dequeurear()
+{
+    if(f==-1||r==-1)
+    cout<<"\n stack underflow";
+    else if(f==r)
+    f=r=-1;
+    else if(r==0)
+    r=N-1;
+    else
+    r--;
+}
+
+void Display()
+{
+    int i=f;
+    while(i!=r)
+    {
+        cout<<deq[i]<<" ";
+        i=(i+1)%N;
+    }
+    cout<<deq[r];
+}
+void push(int x)
+{
+    enqueuerear(x);
+}
+void pop()
+{
+    dequeurear();
+}
+int main()
+{
+   push(1);
+   push(2);
+   push(3);
+   push(4);
+   pop();
+   cout<<"\n stack is\n";
+   Display();
+    return 0;
+}

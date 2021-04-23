@@ -1,0 +1,76 @@
+#include<iostream>
+using namespace std;
+class Node { 
+public: 
+    int data; 
+    Node* next; 
+}; 
+
+Node* newNode(int data) 
+{ 
+    Node* new_node = new Node(); 
+    new_node->data = data; 
+    new_node->next = NULL; 
+    return new_node; 
+} 
+
+void push(Node** head_ref, int new_data) 
+{ 
+    Node* new_node = newNode(new_data); 
+    new_node->next = (*head_ref); 
+    (*head_ref) = new_node; 
+} 
+void Display(Node *p)
+{
+	while(p!=NULL)
+	{
+		cout<<p->data<<" ";
+		p=p->next;
+	}
+}
+
+Node *intersection(Node* p,Node *q)
+{
+    struct Node dummy;
+    struct Node* tail = &dummy;
+    dummy.next = NULL;
+ 
+    while(p!=NULL&&q!=NULL)
+    {
+        if(p->data<q->data)
+        p=p->next;
+        else if(q->data<p->data)
+        q=q->next;
+        else if(p->data==q->data)
+        {
+            push(&tail->next,p->data);
+            tail=tail->next;
+            p=p->next;
+            q=q->next;
+        }
+    }
+  return(dummy.next);
+}
+
+int main()
+{
+    struct Node *first=NULL, *second=NULL,*third=NULL;
+    push(&first,6);
+    push(&first,4);
+    push(&first,3);
+    push(&first,2);
+    push(&first,1);
+    cout<<"first list is:\n";
+    Display(first);
+    push(&second,8);
+    push(&second,6);
+    push(&second,4);
+    push(&second,2);
+    cout<<"\n second list is:\n";
+    Display(second);
+    cout<<"\n list after intersection is:\n";
+    third=intersection(first,second);
+    Display(third);
+  
+    return 0;
+}

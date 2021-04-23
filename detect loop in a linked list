@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+//structure of node in a linked list
+struct Node
+{
+	int data;
+	struct  Node* next;	
+	Node(int data)
+	{
+		this->data=data;
+		next=NULL;
+	}
+};
+struct Node* head=NULL;
+
+void push(int data)
+{
+	Node* temp=new Node(data);
+	temp->next=head;
+	head=temp;
+}
+void print()
+{
+	struct Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+
+ bool isLoop(Node* head)
+ {
+ 	Node *p,*q;
+ 	p=q=head;
+    while(p&&q&&q->next)
+    {
+        p=p->next;
+        q=q->next->next;
+        if(p==q)
+        return true;
+    }
+    return false;
+ }
+
+int main(){
+	push(15);
+	push(20);
+	push(30);
+	push(35);
+	push(40);
+	print();
+	 head->next->next->next->next->next=head;
+	 if(isLoop(head))
+		cout<<"\n Loop detected";
+	 else
+		cout<<"\n Loop not detected";
+}

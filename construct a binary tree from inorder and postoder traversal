@@ -1,0 +1,74 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+class node  
+{  
+    public: 
+    int data;  
+    node* left;  
+    node* right;  
+};  
+
+node* newNode(int data)  
+{  
+    node* new_node = new node();  
+    new_node->data = data;  
+    new_node->left = new_node->right = NULL;  
+    return (new_node);  
+}
+int search(int arr[],int st,int ei, int value)
+{
+    if(st>ei)
+    return 0;
+    int i=0;
+    for(i=st;i<ei;i++)
+    {
+        if(arr[i]==value)
+        break;
+    }
+    return i;
+}
+node* buildutil(int in[],int pos[],int istrt,int iend,int *pIndex)
+{
+    if(istrt>iend)
+    return NULL;
+    
+    node* Node=newNode(pos[*pIndex]);
+    (*pIndex)--;
+    
+    if(istrt==iend)
+    return Node;
+    
+    int iIndex=search(in,istrt,iend,Node->data);
+    Node->right=buildutil(in,pos,iIndex+1,iend,pIndex);
+    Node->left=buildutil(in,pos,istrt,iIndex-1,pIndex);
+    return Node;
+}
+
+node* build(int in[],int pos[],int n)
+{
+    int pIndex=n-1;
+    return buildutil(in,pos,0,n-1,&pIndex);
+}
+  
+  
+  void preorder(node* root)
+  {
+      if(root==NULL)
+      return;
+      
+      cout<<root->data<<" ";
+      preorder(root->left);
+      preorder(root->right);
+  }
+
+int main()  
+{  
+  int in[]={4,8,2,5,1,6,3,7};
+  int pos[]={8,4,5,2,6,7,3,1};
+  int n=sizeof(in)/sizeof(in[0]);
+  node* root=build(in,pos,n);
+  cout<<"tree from inorder and postorder traversal is\n";
+  preorder(root);
+    return 0;  
+}  
+  

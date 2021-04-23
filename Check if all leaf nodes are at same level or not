@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+class node{
+    public:
+    int data;node *left;node *right;
+};
+node* newNode(int data)
+{
+    node *Node=new node();
+    Node->data=data;
+    Node->left=Node->right=NULL;
+    return Node;
+}
+bool checkutil(node* root,int level,int *leaflevel)
+{
+    if(!root)
+    return true;
+    if(root->left==NULL&&root->right==NULL)
+    {
+        if(*leaflevel==0)
+        {
+            *leaflevel=level;
+            return true;
+        }
+        return(level==*leaflevel);
+    }
+    return((checkutil(root->left,level+1,leaflevel))&&(checkutil(root->right,level+1,leaflevel)));
+    
+}
+bool check(node* root)
+{
+    
+    int leaflevel=0;
+    return(checkutil(root,0,&leaflevel));
+}
+int main()
+{
+  node* root=newNode(12);
+ root->left = newNode(5); 
+    root->left->left = newNode(3); 
+    root->left->right = newNode(9); 
+    root->left->left->left = newNode(1); 
+    root->left->right->left = newNode(1);
+  if(check(root))
+  cout<<"\n leaves are at same level";
+  else
+  cout<<"\n leaves are not at same level";
+  
+    return 0;
+}

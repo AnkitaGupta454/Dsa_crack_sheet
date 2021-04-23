@@ -1,0 +1,61 @@
+#include <iostream>
+using namespace std;
+//structure of node in a linked list
+struct Node
+{
+	int data;
+	struct  Node* next;	
+	Node(int data)
+	{
+		this->data=data;
+		next=NULL;
+	}
+};
+struct Node* head=NULL;
+
+void push(int data)
+{
+	Node* temp=new Node(data);
+	temp->next=head;
+	head=temp;
+}
+void print(Node* head)
+{
+	struct Node* temp=head;
+	while(temp!=NULL)
+	{
+		cout<<temp->data<<" ";
+		temp=temp->next;
+	}
+}
+Node* reverse(Node* head,int k)
+{
+	Node* current=head;
+	Node *next=NULL,*prev=NULL;
+	int count=0;
+	while(count<k&&current!=NULL)
+	{
+		next=current->next;
+		current->next=prev;
+		prev=current;
+		current=next;
+		count++;
+	}
+	if(next!=NULL)
+		head->next=reverse(next,k);
+	return prev;
+}
+
+int main()
+{
+	push(1);push(2);push(3);push(4);
+	push(5);
+	push(6);
+	push(7);
+	push(8);
+	push(9);
+	print(head);
+	cout<<"\n list after reversing\n";
+	head=reverse(head,3);
+	print(head);
+}
