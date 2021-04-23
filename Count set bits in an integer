@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+unsigned int countSetBit(int n)
+{
+    unsigned int count=0;
+    while(n)
+    {
+        n&=(n-1);
+        count++;
+    }
+    return count;
+}
+
+int main()
+{
+    int n=9;
+    cout<<"Set bits in "<<n<<" is "<<countSetBit(n);
+    return 0;
+}
+
+
+OUTPUT:-
+set bits in 9 is 2

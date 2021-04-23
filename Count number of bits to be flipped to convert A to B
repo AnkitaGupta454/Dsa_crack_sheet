@@ -1,0 +1,25 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+unsigned int countSetBit(int n)
+{
+    unsigned int count=0;
+    while(n)
+    {
+        n&=(n-1);
+        count++;
+    }
+    return count;
+}
+
+int main()
+{
+    int a=10,b=20;
+    
+    cout<<"No of bits to be flipped are: "<<countSetBit(a^b);
+    return 0;
+}
+
+
+OUTPUT:-
+No of bits to be flipped are: 4 

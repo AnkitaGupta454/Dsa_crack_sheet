@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int a[]={3,5,7,9,20,25,30,40,55,56,57,60,62};
+    int n1=sizeof(a)/sizeof(a[0]);
+    int b[]={1,4,7,11,14,25,44,47,55,57,100};
+    int n2=sizeof(b)/sizeof(b[0]);
+    int result1=0,result2=0,result=0;
+    int j=0;
+    for(int i=0;i<n2;i++){
+    result2+=b[i];
+    while(j<n1&&a[j]<b[i])
+    {
+        result1+=a[j];
+        j++;
+    }
+    if(j<n1&&a[j]==b[i])
+    {
+        result1+=a[j];
+        result+=max(result1,result2);
+        result2=0;
+        result1=0;
+        j++;
+    }
+    }
+    while(j<n1)
+    {
+        result1+=a[j];
+        j++;
+    }
+    result+=max(result1,result2);
+    cout<<result;
+    return 0;
+}
+
+output:-
+450

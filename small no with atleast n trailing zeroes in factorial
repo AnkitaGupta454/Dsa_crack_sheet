@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool check(int p,int n)
+{
+    int temp=p,count=0,f=5;
+    while(f<=temp)
+    {
+        count+=temp/f;
+        f=f*5;
+    }
+    return(count>=n);
+}
+
+int Zero(int n)
+{
+    if(n==1)
+    return 5;
+    int l=0,h=5*n;
+    while(l<h)
+    {
+        int mid=(l+h)>>1;
+        if(check(mid,n))
+        h=mid;
+        else
+        l=mid+1;
+    }
+    return l;
+}
+
+int main()
+{
+    int n=6;
+    cout<<Zero(n);
+    return 0;
+}
