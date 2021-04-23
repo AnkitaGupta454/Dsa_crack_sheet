@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+struct queueEntry
+{
+    int v,dist;
+};
+
+int getminDiceThrow(int move[],int N)
+{
+    bool *visited=new bool[N];
+    for(int i=0;i<N;i++)
+    visited[i]=false;
+
+    queue<queueEntry>q;
+    visited[0]=true;
+    queueEntry s={0,0};
+    q.push(s);
+    queueEntry qe;
+
+    while(!q.empty())
+    {
+        qe=q.front();
+        int v=qe.v;
+        if(v==N-1)
+        break;
+        q.pop();
+        for(int j=v+1;j<=(v+6)&&j<N;j++)
+        {
+            if(!visited[j])
+           { 
+           queueEntry a;
+           a.dist=(qe.dist+1);
+           visited[j]=true;
+
+         if(move[j]!=-1)
+         a.v=move[j];
+
+         else
+        a.v=j;
+         q.push(a);
+            }
+        }
+    }
+
+    return qe.dist;
+}
+
+int main()
+{
+    int N=30;
+    int move[N];
+    for(int i=0;i<N;i++)
+    move[i]=-1;
+
+    //for ladder
+    move[2]=21;
+    move[4]=7;
+    move[10]=25;
+    move[19]=28;
+
+    //for snake
+    move[26]=0;
+    move[20]=8;
+    move[16]=3;
+    move[18]=6;
+
+    int dice=getminDiceThrow(move,N);
+    cout<<"Minimum number of dice thrown required is "<<dice;
+    return 0;
+
+}
+
+output:-
+Minimum number of dice thrown required is 3

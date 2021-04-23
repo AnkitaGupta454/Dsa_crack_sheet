@@ -1,0 +1,64 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define N 3
+
+int getmin(int arr[])
+{
+    int min=0;
+    for(int i=1;i<N;i++)
+    if(arr[i]<arr[min])
+    min=i;
+    return min;
+}
+
+int getmax(int arr[])
+{
+    int max=0;
+    for(int i=1;i<N;i++)
+    if(arr[i]>arr[max])
+    max=i;
+    return max;
+}
+
+int minof2(int x,int y)
+{
+    return (x<y)?x:y;
+}
+
+void mincashflowRec(int amount[])
+{
+    int mxcredit=getmax(amount),mxdebit=getmin(amount);
+
+    //if all cases are processed
+    if(amount[mxcredit]==0 && amount[mxdebit]==0)
+    return;
+
+   int min=minof2(-amount[mxdebit],amount[mxcredit]);
+   amount[mxcredit]-=min;
+   amount[mxdebit]+=min;
+
+   cout<<"person "<<mxdebit<<" pays "<<min<<" to person "<<mxcredit<<"\n";
+   mincashflowRec(amount);
+}
+
+void mincashflow(int graph[][N])
+{
+    int amount[N]={0};
+    for(int p=0;p<N;p++)
+    {
+        for(int i=0;i<N;i++)
+        amount[p]+=(graph[i][p]-graph[p][i]); 
+    }
+     mincashflowRec(amount);
+}
+
+int main()
+{
+    int graph[][N]={{0,1000,2000},{0,0,5000},{0,0,0}};
+    mincashflow(graph);
+    return 0;
+}
+
+output:-
+person 1 pays 4000 to person 2
+person 0 pays 3000 to person 2
