@@ -1,0 +1,27 @@
+//MAx sum of consecutive elements in a circular array
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxSum(int a[],int n)
+{
+    sort(a,a+n);
+    int sum=0;
+    for(int i=0;i<n/2;i++)
+    {
+        sum-=(2*a[i]);
+        sum+=(2*a[n-i-1]);
+    }
+    return sum;
+}
+
+int main()
+{
+    int a[]={4,2,1,8};
+    cout<<"Max sum of consecutive elements is :"<<maxSum(a,4);
+    return 0;
+
+}
+
+
+output:-
+Max sum of consecutive elements is :18

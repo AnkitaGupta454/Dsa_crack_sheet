@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace  std;
+
+int deno[] = { 1, 2, 5, 10, 20,
+               50, 100, 500, 1000 };
+int n = sizeof(deno) / sizeof(deno[0]);
+ 
+void findMin(int V)
+{
+    sort(deno, deno + n);
+ 
+    // Initialize result
+    vector<int> ans;
+ 
+    // Traverse through all denomination
+    for (int i = n - 1; i >= 0; i--) {
+ 
+        // Find denominations
+        while (V >= deno[i]) {
+            V -= deno[i];
+            ans.push_back(deno[i]);
+        }
+    }
+ 
+    // Print result
+    for (int i = 0; i < ans.size(); i++)
+        cout << ans[i] << " ";
+}
+
+int main()
+{
+    int V=93;
+    cout<<"Following is the minimal change for 93:\n";
+    findMin(V);
+    return 0;
+}
+
+output:-
+Following is the minimal change for 93: 50 20 20 2 1

@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void number(int d,int s)
+{
+    if(s==0)
+    {
+        (d==1)?cout<<"minimum number possible is 0":cout<<"Not possible";
+        return ;
+    }
+
+    if(d>9*d)
+    {
+        cout<<"Not possible";
+        return ;
+    }
+
+    int res[d];
+    s-=1;
+    for(int i=d-1;i>=0;i--)
+    {
+        if(s>9)
+        {
+            res[i]=9;
+            s-=9;
+        }
+        else
+        {
+            res[i]=s;
+            s=0;
+        }
+        
+    }
+    res[0]=s+1;
+    cout<<"Smallest number possible is :";
+    for(int i=0;i<d;i++)
+    cout<<res[i];
+}
+
+int main()
+{
+     int d=2,s=9;
+      number(d,s);
+    return 0;
+}
+
+
+output:-
+Smallest number possible is :18

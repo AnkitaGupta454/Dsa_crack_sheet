@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+void MAxSum(int a[],int n,int k)
+{
+   for(int i=1;i<=k;i++)
+   {
+       int min=INT_MAX;
+       int index=-1;
+       for(int j=0;j<n;j++)
+       {
+           if(a[j]<min)
+             {
+                 min=a[j];
+                 index=j;
+             }
+       }
+       if(min==0)
+       break;
+       a[index]=-a[index];
+   }
+
+   int sum=0;
+   for(int j=0;j<n;j++)
+   sum+=a[j];
+   cout<<sum;
+}
+
+int main()
+{
+    int a[]={-2, 0, 5, -1, 2};
+    int n=sizeof(a)/sizeof(a[0]);
+    int k=4;
+    cout<<"MAx sum after "<<k<<" modification is :";
+    MAxSum(a,n,k);
+    return 0;
+}
+
+output:-
+MAx sum after 4 modification is :10
